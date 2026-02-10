@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Valentine Invitation</title>
+<style>
+  :root { --bg:#f7efe6; --primary:#c4142d; --primaryTop:#ff5a76; --shadow:#7a0e1e; }
+  html, body { height:100%; }
+  body { margin:0; padding:24px; display:flex; align-items:center; justify-content:center; background:var(--bg); font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif; }
+  .card { max-width:720px; width:100%; text-align:center; }
+  .heart-wrap { border-radius:14px; box-shadow:0 8px 28px rgba(0,0,0,.15); background:#fff; padding:16px; }
+  /* The pump animation is reused for both hearts */
+  .pump { animation:heartbeat 1.4s ease-in-out infinite; transform-origin:50% 50%; }
+  @keyframes heartbeat { 0%{transform:scale(1);}20%{transform:scale(1.05);}40%{transform:scale(1);}60%{transform:scale(1.05);}100%{transform:scale(1);} }
+  .btn-row { margin:22px auto 0; display:flex; gap:28px; justify-content:center; flex-wrap:wrap; }
+  .btn3d { position:relative; appearance:none; border:none; border-radius:18px; padding:18px 44px; color:#fff; font-weight:800; letter-spacing:.6px; cursor:pointer; background:linear-gradient(var(--primaryTop),var(--primary)); box-shadow:0 12px 0 var(--shadow),0 20px 36px rgba(0,0,0,.25); transform:translateY(0); transition:transform .1s ease,box-shadow .1s ease,filter .2s ease; }
+  .btn3d:active { transform:translateY(10px); box-shadow:0 2px 0 var(--shadow),0 8px 16px rgba(0,0,0,.2); }
+  .btn3d::after { content:''; position:absolute; inset:0; border-radius:18px; background:linear-gradient(180deg,rgba(255,255,255,.45),rgba(255,255,255,0) 55%); pointer-events:none; }
+  .hint { margin-top:10px; color:#6c6c6c; font-size:12px; }
+  .overlay { position:fixed; inset:0; display:none; place-items:center; background:rgba(0,0,0,.45); z-index:1000; }
+  .overlay.show { display:grid; }
+  .cat-box { background:#fff; padding:30px; border-radius:16px; box-shadow:0 12px 36px rgba(0,0,0,.35); text-align:center; }
+  .close { margin-top:18px; border:none; background:transparent; color:var(--primary); font-weight:800; cursor:pointer; font-size: 16px; }
+  /* Cat animations removed */
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="heart-wrap">
+    <svg class="pump" viewBox="0 0 520 520" width="100%" height="auto" aria-label="Will you be my Valentine?">
+      <defs><linearGradient id="heartGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#c4142d"/><stop offset="100%" stop-color="#8f0e22"/></linearGradient></defs>
+      <rect x="0" y="0" width="520" height="520" fill="#fff"/>
+      <path d="M260 440 C220 410,120 350,100 260 C80 180,130 110,190 110 C230 110,250 130,260 150 C270 130,290 110,330 110 C390 110,440 180,420 260 C400 350,300 410,260 440 Z" fill="url(#heartGrad)" stroke="#7a0e1e" stroke-width="6"/>
+      <g font-family="Georgia,'Times New Roman',serif" fill="#fff" font-weight="700" text-anchor="middle">
+        <text x="260" y="220" font-size="40">WILL YOU</text>
+        <text x="260" y="270" font-size="36">BE MY</text>
+        <text x="260" y="320" font-size="38">VALENTINE?</text>
+      </g>
+    </svg>
+  </div>
+  <div class="btn-row"><button class="btn3d" id="yes1">YES</button><button class="btn3d" id="yes2">YES</button></div>
+  <div class="hint">(Tap either YES)</div>
+</div>
+
+<div class="overlay" id="overlay">
+  <div class="cat-box">
+    <svg class="pump" viewBox="0 0 320 320" width="280" height="280" role="img" aria-label="A red heart representing love">
+       <path d="M160,300 C60,200 20,140 20,80 C20,30 60,10 110,10 C140,10 160,40 160,40 C160,40 180,10 210,10 C260,10 300,30 300,80 C300,140 260,200 160,300 Z" fill="#c4142d"/>
+    </svg>
+    <div><button class="close" id="close">Close</button></div>
+  </div>
+</div>
+<script>
+const overlay=document.getElementById('overlay');function showOverlay(){overlay.classList.add('show');}function hideOverlay(){overlay.classList.remove('show');}document.getElementById('yes1').addEventListener('click',showOverlay);document.getElementById('yes2').addEventListener('click',showOverlay);document.getElementById('close').addEventListener('click',hideOverlay);overlay.addEventListener('click',e=>{if(e.target===overlay)hideOverlay();});
+</script>
+</body>
+</html>
